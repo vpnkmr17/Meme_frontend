@@ -31,6 +31,7 @@ function getCookie(name) {
 
 
 function backendHandleData(url,method,myFormData,myForm,id){
+    console.log("HEre url is ",url)
         const xhr=new XMLHttpRequest()
         const responseType='json'
         xhr.responseType=responseType
@@ -62,14 +63,16 @@ function backendHandleData(url,method,myFormData,myForm,id){
         	window.location.href = "index.html";
          	myForm.reset()
         }
-        else if (xhr.status===400){
+        else if (xhr.status===400 || xhr.status===409){
             // console.log("Error here is ",xhr.response)
             const errorJson=xhr.response
-            const contentError=errorJson.content
+            console.log("erroJson is ",errorJson)
+            const contentError=errorJson['error']
+            console.log("Content error is ",contentError)
     
             let contentErrorMsg;
             if (contentError){
-                contentErrorMsg=contentError[0]
+                contentErrorMsg=contentError
                 if(contentErrorMsg){
                     handleMemeFormError(contentErrorMsg,true)
                 }else{
@@ -99,7 +102,8 @@ function backendHandleData(url,method,myFormData,myForm,id){
         var myFormData=new FormData(myForm)
         var url=myForm.getAttribute("action")
         const method=myForm.getAttribute("method")
-        url='https://x-meme-web.herokuapp.com'+url
+        url='https://x-meme-s.herokuapp.com'+url
+        console.log("Url is ",url)
         backendHandleData(url,method,myFormData,myForm)    
 }
 
@@ -107,10 +111,10 @@ function loadMemes(memesElement,meme_id){
 	console.log("memesElement and meem_id is ",memesElement,meme_id)
     const xhr=new XMLHttpRequest() 
     const method='GET'
-    var url='https://x-meme-web.herokuapp.com/memes/'
+    var url='https://x-meme-s.herokuapp.com/memes/'
     if(meme_id){
     	console.log("I am in url")
-    	 url='https://x-meme-web.herokuapp.com/memes/'+meme_id;
+    	 url='https://x-meme-s.herokuapp.com/memes/'+meme_id;
     }
     const responseType='json'
     console.log("url is ",url)
@@ -134,7 +138,8 @@ function loadMemes(memesElement,meme_id){
     }else if(meme_id){
     	console.log("not null id is ")
         caption.value=listedItems["caption"]
-        link.value=listedItems["URL"]
+        console.log("Here caption is ",listedItems["caption"])
+        link.value=listedItems["url"]
     }
 }
     xhr.send()
@@ -145,12 +150,12 @@ function loadMemes(memesElement,meme_id){
 
 
 function formatMemeElement(meme){
-    var user=meme.user
+    var user=meme.name
     var caption=meme.caption
-    var image=meme.URL
+    var image=meme.url
     console.log("user is ",user)
-    var formattedMeme="<div class='col-12 col-md-10 mx-auto border rounded py-3 mb-4' >" + "<p class='font-weight-bold text-capitalize'> @"+user+"</p>"+"<p>"+
-        "<p class='text-truncate text-capitalize'>"+caption+"</p>"+"<img  class='border border-success rounded-lg' src="+image+" alt='My image' width='200' height='200' />"+"</p>"
+    var formattedMeme="<div class='col-12 col-md-10 mx-auto py-3 mb-4' >" + "<p class='font-weight-bold text-light text-capitalize'> @"+user+"</p>"+"<p>"+
+        "<p class='text-truncate text-light text-capitalize'>"+caption+"</p>"+"<img  class='border border-success rounded-lg' src="+image+" alt='My image' width='200' height='200' />"+"</p>"
         +"<div class='btn-group'>"+ "<a  class='btn btn-primary btn-sm' href='Edit.html?"+meme.id+"'>Update</a>" +"</div> </div>"
         
     return formattedMeme

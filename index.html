@@ -1,4 +1,4 @@
-
+ 
 <html>
     <head>
         <!-- Required meta tags -->
@@ -10,11 +10,11 @@
         <script src="script.js"></script>
         <title>Meme</title>
       </head>
-<body >
+<body class="bg-image" style="background-image:url('back.jpg')" >
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
-    <a class="navbar-brand" href="#">Meme</a>
+<nav class="navbar navbar-expand-lg  mb-2">
+    <a class="navbar-brand text-xl" href="#">Meme</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -40,23 +40,24 @@
 
 <div class="row mb-3">
     <div class="col-md-4 mx-auto col-10">
-        <form  class="form" id="meme-create-form" method="POST" action="/memes/create" enctype="multipart/form-data">
+        <form  class="form" id="meme-create-form" method="POST" action="/memes/" enctype="multipart/form-data">
                 <!-- {% csrf_token %} -->
             <div class="d-none alert alert-danger" id="meme-create-form-error"></div>
-            <div class="d-block container" id="content">
-                <input required type="text" class="form-control bg-dark text-light" name="user" id="user" placeholder="Name...">
+            <div class="d-block  container" id="content">
+                <input required type="text" class="form-control bg-dark text-light" name="name" id="name" placeholder="Name...">
             </div>
-            <div class="d-block container" id="content">
+            <div class="d-block mt-2 container" id="content">
                 <textarea required  class="form-control bg-dark text-light" name="caption" id="caption" placeholder="Your caption..."></textarea>
             </div>
-            <div class="d-block container" id="url">
-                <textarea  required class="form-control bg-dark text-light" name="URL" id="url" placeholder="Enter your URL..."></textarea>
+            <div class="d-block mt-2 container" id="url">
+                <textarea  required class="form-control bg-dark text-light" name="url" id="url" placeholder="Enter your URL..."></textarea>
             </div>
                 
             <!-- <button type="button" onclick="addCaption('caption','content')" class="btn btn-primary">Upload Image</button> -->
             <!-- <button type="button" onclick="addCaption('content','caption')" class="btn btn-primary">Content</button> -->
-            
-            <button type="submit" class="btn btn-dark  save">Post</button>
+            <div class="text-center mt-2">
+            <button type="submit" class="btn btn-dark save">Post</button>
+            </div>
             </form> 
             
 

@@ -1,4 +1,4 @@
-
+ 
 <html>
     <head>
         <!-- Required meta tags -->
@@ -11,10 +11,11 @@
         <title>Meme</title>
       </head>
 
-<body>
+<body class="bg-image" style="background-image:url('back.jpg')">
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
+
+<nav class="navbar navbar-expand-lg mb-2">
     <a class="navbar-brand" href="#">Meme</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -39,17 +40,18 @@
         <form  class="form" id="meme-create-form" method="PATCH" action="/memes/update">
                 <!-- {% csrf_token %} -->
             <div class="d-none alert alert-danger" id="meme-create-form-error"></div>
-            <div class="d-block container" id="content">
-                <textarea   class="form-control" name="caption" id="caption" placeholder="Your caption..."></textarea>
+            <div class="d-block mt-2 container" id="content">
+                <textarea   class="form-control bg-dark text-light" name="caption" id="caption" placeholder="Your caption..."></textarea>
             </div>
-            <div class="d-block container" id="ur">
-                <textarea   class="form-control" name="URL" id="url" placeholder="Enter your URL..."></textarea>
+            <div class="d-block mt-2 container" id="ur">
+                <textarea   class="form-control bg-dark text-light" name="url" id="url" placeholder="Enter your URL..."></textarea>
             </div>
                 
             <!-- <button type="button" onclick="addCaption('caption','content')" class="btn btn-primary">Upload Image</button> -->
             <!-- <button type="button" onclick="addCaption('content','caption')" class="btn btn-primary">Content</button> -->
-            
+            <div class="text-center mt-2">
             <button type="submit" class="btn btn-primary save">Update</button>
+            </div>
             </form> 
             
 
@@ -73,7 +75,7 @@ function handleMemeFormDidUpdate(event){
         var myFormData=new FormData(myForm)
         var url=myForm.getAttribute("action")
         const method=myForm.getAttribute("method")
-        url='https://x-meme-web.herokuapp.com'+url+"/"+id
+        url='https://x-meme-s.herokuapp.com'+url+"/"+id
         backendHandleData(url,method,myFormData,myForm,"id")    
 }
 
